@@ -102,7 +102,6 @@ class Renderer {
 				lineWidth = 3
 			}else {
 				let style = obj.getStyle()
-				console.log(style)
 				fillStyle = style.fillStyle
 				lineCol = style.lineCol
 				lineWidth = style.lineWidth
