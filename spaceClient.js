@@ -11,7 +11,7 @@ const InteractiveObjID = {player:1, ship:2, asteroid:3, projectile:4}
 const UNIVERSE_SIZE = 50000
 const NUM_SECTORS_X = 50 //UNIVERSE_SIZE/500
 const NUM_SECTORS_Y = 50 //UNIVERSE_SIZE/500
-const NUM_ASTEROIDS = 5000
+const NUM_ASTEROIDS = 4000
 
 let ready = true
 let gamePaused = false
