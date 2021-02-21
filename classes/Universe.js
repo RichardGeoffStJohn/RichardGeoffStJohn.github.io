@@ -13,8 +13,6 @@ class Universe {
 		this.setAllObjectArrays()
 		this.totalCollisionCount = 0
 		this.player = null
-		this.spareVec = new Vector2D(0,0)
-		
 	}
 	
 	mod(num1,num2){
@@ -115,7 +113,7 @@ class Universe {
 		let objZone = object.getZone()
 			
 		//handle objects moving out of universe bounds (wrap back to other side)
-		let v = new Vector2(0,0);
+		let v = new Vector2D(0,0);
 		
 		if(objOrigin.x < 0) {
 			v.translate(this.size, 0)
