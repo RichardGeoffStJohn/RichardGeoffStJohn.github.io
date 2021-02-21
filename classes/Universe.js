@@ -83,7 +83,6 @@ class Universe {
 					arrs.push(this.interactiveObjects[this.mod(i-1,this.numSectorsX)][j])
 					arrs.push(this.interactiveObjects[this.mod(i-1,this.numSectorsX)][this.mod(j+1, this.numSectorsY)])
 				}
-				
 				arrs.push(this.interactiveObjects[i][this.mod(j-1, this.numSectorsY)])
 				arrs.push(this.interactiveObjects[this.mod(i+1,this.numSectorsX)][this.mod(j-1, this.numSectorsY)])
 				
