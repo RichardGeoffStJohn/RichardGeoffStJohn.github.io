@@ -79,13 +79,19 @@ class Universe {
 			for (let j=0, n2=this.interactiveObjects[i].length; j<n2; j++) {
 				if (this.interactiveObjects[i][j].length === 0) {continue}
 				let arrs = []
-				arrs.push(this.interactiveObjects[this.mod(i-1,this.numSectorsX)][this.mod(j-1, this.numSectorsY)])
+				
+				if (i === 0) {
+					arrs.push(this.interactiveObjects[this.mod(i-1,this.numSectorsX)][this.mod(j-1, this.numSectorsY)])
+					arrs.push(this.interactiveObjects[this.mod(i-1,this.numSectorsX)][j])
+					arrs.push(this.interactiveObjects[this.mod(i-1,this.numSectorsX)][this.mod(j+1, this.numSectorsY)])
+				}
+				
 				arrs.push(this.interactiveObjects[i][this.mod(j-1, this.numSectorsY)])
 				arrs.push(this.interactiveObjects[this.mod(i+1,this.numSectorsX)][this.mod(j-1, this.numSectorsY)])
-				arrs.push(this.interactiveObjects[this.mod(i-1,this.numSectorsX)][j])
+				
 				//arrs.push(this.interactiveObjects[i][j])
 				arrs.push(this.interactiveObjects[this.mod(i+1,this.numSectorsX)][j])
-				arrs.push(this.interactiveObjects[this.mod(i-1,this.numSectorsX)][this.mod(j+1, this.numSectorsY)])
+				
 				arrs.push(this.interactiveObjects[i][this.mod(j+1, this.numSectorsY)])
 				arrs.push(this.interactiveObjects[this.mod(i+1,this.numSectorsX)][this.mod(j+1, this.numSectorsY)])
 
