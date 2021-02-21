@@ -9,9 +9,10 @@ const BackgroundObjID = {star:1}
 const InteractiveObjID = {player:1, ship:2, asteroid:3, projectile:4}
 
 const UNIVERSE_SIZE = 50000
-const NUM_SECTORS_X = 50 //UNIVERSE_SIZE/500
-const NUM_SECTORS_Y = 50 //UNIVERSE_SIZE/500
+const NUM_SECTORS_X = 50
+const NUM_SECTORS_Y = 50
 const NUM_ASTEROIDS = 4000
+const NUM_STARS = 25000
 
 let ready = true
 let gamePaused = false
@@ -19,11 +20,9 @@ let globalCounter = 0
 
 let keysPressed = {arowDown:false, arrowUp:false, arrowLef:false, arrowRight:false}
 
-
 let stars = []
 let asteroids = []
 let ships = []
-//
 
 const objPool = new ObjectPool()
 const universe = new Universe(UNIVERSE_SIZE, NUM_SECTORS_X, NUM_SECTORS_Y)
@@ -39,9 +38,8 @@ let player = new PlayerShip(
 
 
 //Create background
-
 function setBackgroundStars() {
-	for(let i=0; i<UNIVERSE_SIZE*UNIVERSE_SIZE/100000; i++){
+	for(let i=0; i<NUM_STARS; i++){
 		let rand1 = Math.random()*UNIVERSE_SIZE
 		let rand2 = Math.random()*UNIVERSE_SIZE
 		let xCoord = Math.floor(rand1)
@@ -250,7 +248,6 @@ asteroids.push()
 universe.setBackgroundStars(stars)
 ships.push(player)
 
-//console.log(player.boundingBox)
 universe.setPlayer(player)
 universe.setInteractiveObjects(asteroids, ships)
 
