@@ -10,7 +10,6 @@ class Universe {
 		this.interactiveObjects = []
 		this.tempObjs = [] 
 		
-		
 		this.setAllObjectArrays()
 		this.totalCollisionCount = 0
 		this.player = null
@@ -51,10 +50,7 @@ class Universe {
 	setPlayer(player){
 		this.player = player
 	}
-	
-	/*
-		stars is an array of Star objects
-	*/
+
 	setBackgroundStars(stars) {
 		for(let i=0; i<stars.length; i++) {
 			let star = stars[i]
@@ -78,37 +74,10 @@ class Universe {
 		}
 	}
 	
-	
-	
 	calcCollisions(collisionDetector) {
 		for (let i=0, n1=this.interactiveObjects.length; i<n1; i++) {
 			for (let j=0, n2=this.interactiveObjects[i].length; j<n2; j++) {
-				
-				/*
-				collisionDetector.findCollisions(this.interactiveObjects[i][j].concat( 
-					this.interactiveObjects[this.mod(i-1,this.numSectorsX)][this.mod(j-1, this.numSectorsY)],
-					this.interactiveObjects[i][this.mod(j-1, this.numSectorsY)],
-					this.interactiveObjects[this.mod(i+1,this.numSectorsX)][this.mod(j-1, this.numSectorsY)],
-					this.interactiveObjects[this.mod(i-1,this.numSectorsX)][j],
-					this.interactiveObjects[this.mod(i+1,this.numSectorsX)][j],
-					this.interactiveObjects[this.mod(i-1,this.numSectorsX)][this.mod(j+1, this.numSectorsY)],
-					this.interactiveObjects[i][this.mod(j+1, this.numSectorsY)],
-					this.interactiveObjects[this.mod(i+1,this.numSectorsX)][this.mod(j+1, this.numSectorsY)]));
-				*/
-				//collisionDetector.findCollisions(this.interactiveObjects[i][j])
-				
 				if (this.interactiveObjects[i][j].length === 0) {continue}
-				
-				/*
-				if (i === 0)  {
-					console.log(this.mod(i-1,this.numSectorsX))
-				}	
-				if (j === 0)	 {
-					console.log(this.mod(j-1, this.numSectorsY))
-				}
-				*/
-				
-				
 				let arrs = []
 				arrs.push(this.interactiveObjects[this.mod(i-1,this.numSectorsX)][this.mod(j-1, this.numSectorsY)])
 				arrs.push(this.interactiveObjects[i][this.mod(j-1, this.numSectorsY)])
@@ -119,20 +88,8 @@ class Universe {
 				arrs.push(this.interactiveObjects[this.mod(i-1,this.numSectorsX)][this.mod(j+1, this.numSectorsY)])
 				arrs.push(this.interactiveObjects[i][this.mod(j+1, this.numSectorsY)])
 				arrs.push(this.interactiveObjects[this.mod(i+1,this.numSectorsX)][this.mod(j+1, this.numSectorsY)])
-				
-				//console.log(this.mod(i-1,this.numSectorsX))
-			
+
 				this.totalCollisionCount += collisionDetector.findCollisions(this.interactiveObjects[i][j], arrs)
-					/*this.interactiveObjects[this.mod(i-1,this.numSectorsX)][this.mod(j-1, this.numSectorsY)],
-					this.interactiveObjects[i][this.mod(j-1, this.numSectorsY)],
-					this.interactiveObjects[this.mod(i+1,this.numSectorsX)][this.mod(j-1, this.numSectorsY)],
-					this.interactiveObjects[this.mod(i-1,this.numSectorsX)][j],
-					this.interactiveObjects[this.mod(i+1,this.numSectorsX)][j],
-					this.interactiveObjects[this.mod(i-1,this.numSectorsX)][this.mod(j+1, this.numSectorsY)],
-					this.interactiveObjects[i][this.mod(j+1, this.numSectorsY)],
-					this.interactiveObjects[this.mod(i+1,this.numSectorsX)][this.mod(j+1, this.numSectorsY)]);				*
-					*/
-					
 				this.setFinishedColCalc(this.interactiveObjects[i][j])
 			}
 		}
@@ -152,22 +109,22 @@ class Universe {
 		let objZone = object.getZone()
 			
 		//handle objects moving out of universe bounds (wrap back to other side)
-		this.spareVec.zero()
+		let v = new Vector2(0,0);
 		
 		if(objOrigin.x < 0) {
-			this.spareVec.translate(this.size, 0)
+			v.translate(this.size, 0)
 		}
 		else if(objOrigin.x >= this.size) {
-			this.spareVec.translate(-this.size, 0)
+			v.translate(-this.size, 0)
 		}
 		
 		if(objOrigin.y < 0) {
-			this.spareVec.translate(0, this.size)
+			v.translate(0, this.size)
 		}
 		else if (objOrigin.y >= this.size) {
-			this.spareVec.translate(0, -this.size)
+			v.translate(0, -this.size)
 		}
-		object.moveOrigin(this.spareVec)
+		object.moveOrigin(v)
 		
 		let i = this.setZoneIndexOne(object)
 		let j = this.setZoneIndexTwo(object)
